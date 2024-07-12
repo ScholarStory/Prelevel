@@ -15,26 +15,20 @@
         .audio-container {
             margin-bottom: 20px;
         }
+        .audio-container audio {
+            width: 100%;
+        }
+        /* 다운로드 버튼 숨기기 */
         audio::-webkit-media-controls-enclosure {
             overflow: hidden;
         }
         audio::-webkit-media-controls-panel {
             width: calc(100% + 30px);
         }
-        audio::-webkit-media-controls-download-button {
-            display: none;
-        }
-        audio::-webkit-media-controls-playback-rate-button {
-            display: none;
-        }
+        audio::-webkit-media-controls-download-button,
+        audio::-webkit-media-controls-playback-rate-button,
         audio::-webkit-media-controls-fullscreen-button {
-            display: none;
-        }
-        audio::-webkit-media-controls-current-time-display {
-            display: block !important;
-        }
-        audio::-webkit-media-controls-time-remaining-display {
-            display: block !important;
+            display: none !important;
         }
     </style>
 </head>
