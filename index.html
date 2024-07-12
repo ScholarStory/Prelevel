@@ -110,12 +110,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            console.log("DOM fully loaded and parsed"); // DOM 로드 확인
             const daySelect = document.getElementById('day-select');
             const audioContainer = document.getElementById('audio-container');
             let currentSound = null; // 현재 재생 중인 오디오를 추적하는 변수
 
             daySelect.addEventListener('change', function() {
                 const day = this.value;
+                console.log(`Selected day: ${day}`); // 선택된 Day 확인
                 if (currentSound) {
                     currentSound.stop(); // 기존에 재생 중인 오디오 중지
                 }
@@ -125,6 +127,7 @@
             function loadAudioFiles(day) {
                 const vocaSrc = `audio/plvd${day}.mp3`;
                 const diarySrc = `audio/pldd${day}.mp3`;
+                console.log(`Loading files: ${vocaSrc}, ${diarySrc}`); // 로드할 파일 경로 확인
 
                 const html = `
                     <div class="audio-container">
@@ -160,10 +163,10 @@
                         onload: function() {
                             const duration = sound.duration();
                             audioDuration.textContent = formatTime(duration);
-                            console.log(`Loaded: ${audioSrc}`); // 파일 경로 출력
+                            console.log(`Loaded: ${audioSrc}`); // 파일 로드 성공 로그
                         },
                         onloaderror: function() {
-                            console.error(`Failed to load: ${audioSrc}`); // 로딩 실패 경고
+                            console.error(`Failed to load: ${audioSrc}`); // 파일 로드 실패 로그
                         }
                     });
 
