@@ -112,9 +112,13 @@
         document.addEventListener('DOMContentLoaded', function() {
             const daySelect = document.getElementById('day-select');
             const audioContainer = document.getElementById('audio-container');
+            let currentSound = null; // 현재 재생 중인 오디오를 추적하는 변수
 
             daySelect.addEventListener('change', function() {
                 const day = this.value;
+                if (currentSound) {
+                    currentSound.stop(); // 기존에 재생 중인 오디오 중지
+                }
                 loadAudioFiles(day);
             });
 
@@ -156,6 +160,10 @@
                         onload: function() {
                             const duration = sound.duration();
                             audioDuration.textContent = formatTime(duration);
+                            console.log(`Loaded: ${audioSrc}`); // 파일 경로 출력
+                        },
+                        onloaderror: function() {
+                            console.error(`Failed to load: ${audioSrc}`); // 로딩 실패 경고
                         }
                     });
 
@@ -164,8 +172,12 @@
                             sound.pause();
                             playButton.textContent = 'Play';
                         } else {
+                            if (currentSound && currentSound !== sound) {
+                                currentSound.stop(); // 기존에 재생 중인 오디오 중지
+                            }
                             sound.play();
                             playButton.textContent = 'Pause';
+                            currentSound = sound; // 현재 재생 중인 오디오 업데이트
                         }
                     });
 
