@@ -75,7 +75,6 @@
         <label for="day-select">Select Day:</label>
         <select id="day-select">
             <option value="" selected disabled>Select Day</option>
-            <!-- Day 옵션들 -->
             <option value="1">Day 1</option>
             <option value="2">Day 2</option>
             <option value="3">Day 3</option>
@@ -103,23 +102,21 @@
         </select>
     </div>
 
-    <!-- Audio 컨테이너들 -->
     <div id="audio-container"></div>
 
-    <!-- Howler.js 라이브러리 포함 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            console.log("DOM fully loaded and parsed"); // DOM 로드 확인
+            console.log("DOM fully loaded and parsed");
             const daySelect = document.getElementById('day-select');
             const audioContainer = document.getElementById('audio-container');
-            let currentSound = null; // 현재 재생 중인 오디오를 추적하는 변수
+            let currentSound = null;
 
             daySelect.addEventListener('change', function() {
                 const day = this.value;
-                console.log(`Selected day: ${day}`); // 선택된 Day 확인
+                console.log(`Selected day: ${day}`);
                 if (currentSound) {
-                    currentSound.stop(); // 기존에 재생 중인 오디오 중지
+                    currentSound.stop();
                 }
                 loadAudioFiles(day);
             });
@@ -127,7 +124,7 @@
             function loadAudioFiles(day) {
                 const vocaSrc = `audio/plvd${day}.mp3`;
                 const diarySrc = `audio/pldd${day}.mp3`;
-                console.log(`Loading files: ${vocaSrc}, ${diarySrc}`); // 로드할 파일 경로 확인
+                console.log(`Loading files: ${vocaSrc}, ${diarySrc}`);
 
                 const html = `
                     <div class="audio-container">
@@ -163,10 +160,10 @@
                         onload: function() {
                             const duration = sound.duration();
                             audioDuration.textContent = formatTime(duration);
-                            console.log(`Loaded: ${audioSrc}`); // 파일 로드 성공 로그
+                            console.log(`Loaded: ${audioSrc}`);
                         },
                         onloaderror: function() {
-                            console.error(`Failed to load: ${audioSrc}`); // 파일 로드 실패 로그
+                            console.error(`Failed to load: ${audioSrc}`);
                         }
                     });
 
@@ -176,11 +173,11 @@
                             playButton.textContent = 'Play';
                         } else {
                             if (currentSound && currentSound !== sound) {
-                                currentSound.stop(); // 기존에 재생 중인 오디오 중지
+                                currentSound.stop();
                             }
                             sound.play();
                             playButton.textContent = 'Pause';
-                            currentSound = sound; // 현재 재생 중인 오디오 업데이트
+                            currentSound = sound;
                         }
                     });
 
